@@ -1,0 +1,767 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --primary:#1B4FD8;--primary-dark:#1340B0;--primary-light:#EEF2FF;
+    --accent:#F59E0B;--accent-dark:#D97706;
+    --dark:#0F172A;--dark2:#1E293B;--dark3:#334155;
+    --text:#1E293B;--text2:#475569;--text3:#94A3B8;
+    --white:#FFFFFF;--gray50:#F8FAFC;--gray100:#F1F5F9;--gray200:#E2E8F0;
+    --green:#10B981;--red:#EF4444;
+    --radius:12px;--radius-lg:20px;--radius-xl:28px;
+    --shadow:0 4px 24px rgba(15,23,42,.08);--shadow-lg:0 8px 40px rgba(15,23,42,.14);
+  }
+  body{font-family:'Cairo',sans-serif;direction:rtl;color:var(--text);background:#fff;overflow-x:hidden}
+  
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray200);padding:0 24px}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .nav-logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;color:var(--primary);text-decoration:none}
+  .nav-logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:800}
+  .nav-links{display:flex;align-items:center;gap:8px}
+  .nav-link{padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .2s;border:none;background:none}
+  .nav-link:hover{color:var(--primary);background:var(--primary-light)}
+  .nav-cta{padding:10px 20px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Cairo',sans-serif}
+  .nav-cta:hover{background:var(--primary-dark);transform:translateY(-1px)}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#0F172A 0%,#1E3A6E 50%,#1B4FD8 100%);min-height:88vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 24px}
+  .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,.04)'/%3E%3C/svg%3E")}
+  .hero-blob{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(27,79,216,.35) 0%,transparent 70%);border-radius:50%;top:-100px;left:-100px;pointer-events:none}
+  .hero-blob2{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(245,158,11,.15) 0%,transparent 70%);border-radius:50%;bottom:-50px;right:50px;pointer-events:none}
+  .hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:#FCD34D;padding:6px 14px;border-radius:99px;font-size:13px;font-weight:600;margin-bottom:20px}
+  .hero-badge-dot{width:6px;height:6px;background:#F59E0B;border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+  .hero h1{font-size:46px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:20px}
+  .hero h1 span{color:#FCD34D}
+  .hero-sub{font-size:17px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:32px}
+  .hero-stats{display:flex;gap:24px;margin-bottom:36px}
+  .hero-stat{text-align:center}
+  .hero-stat-num{font-size:28px;font-weight:900;color:#fff}
+  .hero-stat-label{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px}
+  .hero-stat-divider{width:1px;background:rgba(255,255,255,.15)}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-primary{padding:16px 32px;background:var(--accent);color:var(--dark);border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;transition:all .25s;font-family:'Cairo',sans-serif;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,158,11,.4)}
+  .btn-secondary{padding:16px 28px;background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.25);border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .25s;font-family:'Cairo',sans-serif}
+  .btn-secondary:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+  .hero-visual{position:relative}
+  .hero-card{background:rgba(255,255,255,.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;color:#fff}
+  .hero-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .hero-card-title{font-size:14px;color:rgba(255,255,255,.7);font-weight:500}
+  .hero-card-badge{background:rgba(16,185,129,.2);color:#6EE7B7;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600}
+  .revenue-big{font-size:42px;font-weight:900;color:#fff;margin-bottom:6px}
+  .revenue-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px}
+  .rev-bars{display:flex;align-items:flex-end;gap:6px;height:80px}
+  .rev-bar{flex:1;border-radius:6px 6px 0 0;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+  .rev-bar-fill{position:absolute;bottom:0;left:0;right:0;border-radius:6px 6px 0 0;background:linear-gradient(180deg,rgba(27,79,216,.9),rgba(27,79,216,.4))}
+  .rev-bar.accent .rev-bar-fill{background:linear-gradient(180deg,rgba(245,158,11,.9),rgba(245,158,11,.4))}
+  .hero-mini-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .hero-mini-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px}
+  .hmc-icon{font-size:18px;margin-bottom:6px}
+  .hmc-val{font-size:18px;font-weight:800;color:#fff}
+  .hmc-label{font-size:11px;color:rgba(255,255,255,.5)}
+  .floating-pill{position:absolute;background:#fff;border-radius:99px;padding:8px 14px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--dark);box-shadow:0 4px 20px rgba(0,0,0,.15)}
+  .fp-dot{width:8px;height:8px;border-radius:50%}
+  .fp1{top:-20px;right:-10px;animation:floatY 3s ease-in-out infinite}
+  .fp2{bottom:60px;left:-30px;animation:floatY 3s ease-in-out infinite .5s}
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* TRUST BAR */
+  .trust-bar{background:var(--gray50);border-top:1px solid var(--gray200);border-bottom:1px solid var(--gray200);padding:20px 24px}
+  .trust-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+  .trust-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--text2)}
+  .trust-icon{font-size:18px}
+
+  /* SECTION STYLES */
+  section{padding:80px 24px}
+  .section-inner{max-width:1100px;margin:0 auto}
+  .section-tag{display:inline-block;background:var(--primary-light);color:var(--primary);padding:5px 14px;border-radius:99px;font-size:13px;font-weight:700;margin-bottom:14px}
+  .section-title{font-size:36px;font-weight:900;color:var(--dark);margin-bottom:12px;line-height:1.25}
+  .section-sub{font-size:16px;color:var(--text2);line-height:1.8;max-width:580px}
+  .text-center{text-align:center}
+  .text-center .section-sub{margin:0 auto}
+
+  /* WHY JOIN */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .why-card{background:#fff;border:1px solid var(--gray200);border-radius:var(--radius-lg);padding:28px;transition:all .3s;cursor:default}
+  .why-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .why-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+  .why-card h3{font-size:17px;font-weight:800;color:var(--dark);margin-bottom:8px}
+  .why-card p{font-size:14px;color:var(--text2);line-height:1.7}
+
+  /* FEATURES */
+  .features-bg{background:var(--dark);color:#fff}
+  .features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px}
+  .feat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:28px;transition:all .3s}
+  .feat-card:hover{background:rgba(255,255,255,.08);border-color:rgba(27,79,216,.4);transform:translateY(-3px)}
+  .feat-icon{width:48px;height:48px;background:rgba(27,79,216,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+  .feat-card h3{font-size:17px;font-weight:800;color:#fff;margin-bottom:8px}
+  .feat-card p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7}
+  .feat-list{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:6px}
+  .feat-list li{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.7)}
+  .feat-list li::before{content:'✓';color:#6EE7B7;font-weight:700;font-size:13px}
+
+  /* STEPS */
+  .steps-section{background:var(--gray50)}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px;position:relative}
+  .steps-grid::before{content:'';position:absolute;top:32px;right:16.66%;left:16.66%;height:2px;background:linear-gradient(to left,var(--primary),var(--accent));z-index:0}
+  .step-card{text-align:center;position:relative;z-index:1}
+  .step-num{width:64px;height:64px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;margin:0 auto 20px;border:4px solid #fff;box-shadow:0 0 0 3px var(--primary);position:relative;z-index:1}
+  .step-card h3{font-size:17px;font-weight:800;color:var(--dark);margin-bottom:8px}
+  .step-card p{font-size:14px;color:var(--text2);line-height:1.7}
+
+  /* PRICING */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .plan-card{background:#fff;border:1.5px solid var(--gray200);border-radius:var(--radius-lg);padding:32px;position:relative;transition:all .3s}
+  .plan-card.featured{border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-light)}
+  .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:5px 18px;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+  .plan-name{font-size:15px;font-weight:700;color:var(--text2);margin-bottom:8px}
+  .plan-price{font-size:38px;font-weight:900;color:var(--dark);margin-bottom:4px}
+  .plan-price span{font-size:16px;font-weight:500;color:var(--text3)}
+  .plan-desc{font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.6}
+  .plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+  .plan-features li{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text)}
+  .plan-features li .check{color:var(--green);font-weight:700}
+  .plan-features li .cross{color:var(--text3);font-weight:700}
+  .plan-btn{width:100%;padding:13px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Cairo',sans-serif;border:2px solid var(--primary);background:transparent;color:var(--primary)}
+  .plan-btn.featured-btn{background:var(--primary);color:#fff}
+  .plan-btn:hover{transform:translateY(-2px)}
+  .plan-btn.featured-btn:hover{background:var(--primary-dark);box-shadow:0 6px 20px rgba(27,79,216,.35)}
+
+  /* TESTIMONIALS */
+  .testimonials-bg{background:var(--gray50)}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .testi-card{background:#fff;border:1px solid var(--gray200);border-radius:var(--radius-lg);padding:28px;transition:all .3s}
+  .testi-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .testi-stars{color:var(--accent);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+  .testi-text{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-style:italic}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff}
+  .testi-name{font-size:15px;font-weight:700;color:var(--dark)}
+  .testi-role{font-size:12px;color:var(--text3)}
+  .testi-revenue{display:inline-flex;align-items:center;gap:6px;background:#ECFDF5;color:#065F46;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;margin-top:10px}
+
+  /* COMPARE */
+  .compare-table{margin-top:48px;border:1px solid var(--gray200);border-radius:var(--radius-lg);overflow:hidden}
+  .cmp-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-bottom:1px solid var(--gray200)}
+  .cmp-row:last-child{border-bottom:none}
+  .cmp-row.header{background:var(--dark)}
+  .cmp-cell{padding:14px 20px;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--text2)}
+  .cmp-cell:first-child{justify-content:flex-start;font-weight:600;color:var(--text)}
+  .cmp-row.header .cmp-cell{color:rgba(255,255,255,.7);font-weight:700;font-size:13px}
+  .cmp-row.header .cmp-cell.us{color:#FCD34D}
+  .cmp-row:nth-child(even):not(.header){background:var(--gray50)}
+  .cmp-check{color:var(--green);font-size:17px;font-weight:700}
+  .cmp-cross{color:var(--text3);font-size:17px}
+  .cmp-row.highlight-row{background:#EEF2FF!important}
+
+  /* FAQ */
+  .faq-list{margin-top:48px;display:flex;flex-direction:column;gap:12px;max-width:780px;margin-left:auto;margin-right:auto}
+  .faq-item{background:#fff;border:1px solid var(--gray200);border-radius:var(--radius);overflow:hidden;transition:all .2s}
+  .faq-item.open{border-color:var(--primary)}
+  .faq-question{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:15px;font-weight:700;color:var(--dark);gap:12px}
+  .faq-icon{width:28px;height:28px;border-radius:50%;background:var(--gray100);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--primary);transition:all .3s;flex-shrink:0}
+  .faq-item.open .faq-icon{background:var(--primary);color:#fff;transform:rotate(45deg)}
+  .faq-answer{padding:0 22px;max-height:0;overflow:hidden;transition:all .35s ease;font-size:14px;color:var(--text2);line-height:1.8}
+  .faq-item.open .faq-answer{padding:0 22px 18px;max-height:300px}
+
+  /* FINAL CTA */
+  .final-cta{background:linear-gradient(135deg,var(--primary-dark),var(--primary),#2563EB);padding:80px 24px;text-align:center;position:relative;overflow:hidden}
+  .final-cta::before{content:'';position:absolute;width:400px;height:400px;background:rgba(245,158,11,.1);border-radius:50%;top:-100px;right:-100px}
+  .final-cta::after{content:'';position:absolute;width:300px;height:300px;background:rgba(255,255,255,.04);border-radius:50%;bottom:-80px;left:-60px}
+  .final-cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+  .final-cta h2{font-size:42px;font-weight:900;color:#fff;margin-bottom:14px;line-height:1.2}
+  .final-cta h2 span{color:#FCD34D}
+  .final-cta p{font-size:17px;color:rgba(255,255,255,.8);margin-bottom:36px;line-height:1.7}
+  .final-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* FORM SECTION */
+  .form-section{background:var(--gray50);padding:80px 24px}
+  .form-wrapper{max-width:620px;margin:0 auto;background:#fff;border:1px solid var(--gray200);border-radius:var(--radius-xl);padding:48px;box-shadow:var(--shadow-lg)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .form-group{display:flex;flex-direction:column;gap:6px}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{font-size:14px;font-weight:600;color:var(--text)}
+  .form-group input,.form-group select,.form-group textarea{padding:12px 16px;border:1.5px solid var(--gray200);border-radius:10px;font-size:15px;color:var(--text);background:#fff;font-family:'Cairo',sans-serif;transition:border-color .2s;outline:none}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary)}
+  .form-group textarea{resize:vertical;min-height:90px}
+  .form-submit{width:100%;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;transition:all .25s;font-family:'Cairo',sans-serif;margin-top:8px}
+  .form-submit:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(27,79,216,.3)}
+  .form-guarantee{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--text3);margin-top:14px}
+
+  /* FOOTER */
+  footer{background:var(--dark);color:rgba(255,255,255,.7);padding:48px 24px 24px}
+  .footer-inner{max-width:1100px;margin:0 auto}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-brand p{font-size:14px;line-height:1.8;margin-top:12px;color:rgba(255,255,255,.5)}
+  .footer-col h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px}
+  .footer-col a{display:block;font-size:14px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:8px;transition:color .2s}
+  .footer-col a:hover{color:#fff}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.35)}
+  .footer-social{display:flex;gap:10px}
+  .social-btn{width:34px;height:34px;background:rgba(255,255,255,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s}
+  .social-btn:hover{background:var(--primary)}
+  .bg-blue{background:#EEF2FF}.bg-green{background:#ECFDF5}.bg-amber{background:#FFFBEB}.bg-purple{background:#F5F3FF}.bg-red{background:#FEF2F2}.bg-teal{background:#F0FDF4}
+  .scroll-to-top{position:fixed;bottom:24px;left:24px;width:44px;height:44px;background:var(--primary);color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(27,79,216,.4);transition:all .3s;z-index:999;display:flex;align-items:center;justify-content:center}
+  .scroll-to-top:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,79,216,.5)}
+</style>
+
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-icon">م</div>
+      ماركت برو
+    </a>
+    <div class="nav-links">
+      <button class="nav-link" onclick="scrollToSection('#why')">لماذا نحن؟</button>
+      <button class="nav-link" onclick="scrollToSection('#features')">المميزات</button>
+      <button class="nav-link" onclick="scrollToSection('#pricing')">الباقات</button>
+      <button class="nav-link" onclick="scrollToSection('#faq')">الأسئلة الشائعة</button>
+      <button class="nav-cta" onclick="scrollToSection('#register')">ابدأ البيع الآن ←</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        +١٠,٠٠٠ بائع نشط الآن
+      </div>
+      <h1>ابدأ البيع<br>لـ<span>ملايين العملاء</span><br>من مكانك</h1>
+      <p class="hero-sub">انضم إلى أكبر منصة تجارة إلكترونية متعددة البائعين. سجّل متجرك في دقائق، واوصل منتجاتك لعملاء في كل مكان — بدون تعقيد، بدون تكاليف مسبقة.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">٣.٢M+</div><div class="hero-stat-label">عميل نشط</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="hero-stat-num">١٢٠٪</div><div class="hero-stat-label">متوسط نمو المبيعات</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="hero-stat-num">٢٤/٧</div><div class="hero-stat-label">دعم متواصل</div></div>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToSection('#register')">سجّل متجرك مجاناً ←</button>
+        <button class="btn-secondary" onclick="scrollToSection('#features')">اعرف المزيد</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-pill fp1"><div class="fp-dot" style="background:#10B981"></div>تم بيع ٤٧ منتج اليوم!</div>
+      <div class="floating-pill fp2"><div class="fp-dot" style="background:#F59E0B"></div>إيراد +٢,٣٤٠ ريال هذا الأسبوع</div>
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-title">إيراداتك هذا الشهر</div>
+          <div class="hero-card-badge">↑ ٣٢٪</div>
+        </div>
+        <div class="revenue-big">١٨,٤٣٠ ريال</div>
+        <div class="revenue-sub">مقارنة بـ ١٣,٩٦٠ الشهر الماضي</div>
+        <div class="rev-bars">
+          <div class="rev-bar"><div class="rev-bar-fill" style="height:45%"></div></div>
+          <div class="rev-bar"><div class="rev-bar-fill" style="height:60%"></div></div>
+          <div class="rev-bar"><div class="rev-bar-fill" style="height:50%"></div></div>
+          <div class="rev-bar"><div class="rev-bar-fill" style="height:72%"></div></div>
+          <div class="rev-bar"><div class="rev-bar-fill" style="height:65%"></div></div>
+          <div class="rev-bar"><div class="rev-bar-fill" style="height:80%"></div></div>
+          <div class="rev-bar accent"><div class="rev-bar-fill" style="height:100%"></div></div>
+        </div>
+        <div class="hero-mini-cards">
+          <div class="hero-mini-card">
+            <div class="hmc-icon">📦</div>
+            <div class="hmc-val">١٤٧</div>
+            <div class="hmc-label">طلب مكتمل</div>
+          </div>
+          <div class="hero-mini-card">
+            <div class="hmc-icon">⭐</div>
+            <div class="hmc-val">٤.٩</div>
+            <div class="hmc-label">تقييم المتجر</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">🔒</span>تسجيل آمن ومشفر</div>
+    <div class="trust-item"><span class="trust-icon">💳</span>دفع فوري وموثوق</div>
+    <div class="trust-item"><span class="trust-icon">🚀</span>ابدأ خلال ٢٤ ساعة</div>
+    <div class="trust-item"><span class="trust-icon">🎯</span>بدون رسوم إعداد</div>
+    <div class="trust-item"><span class="trust-icon">💬</span>دعم ٢٤/٧ بالعربية</div>
+  </div>
+</div>
+
+<!-- WHY JOIN -->
+<section id="why">
+  <div class="section-inner">
+    <div class="text-center" style="margin-bottom:0">
+      <div class="section-tag">لماذا تنضم إلينا؟</div>
+      <h2 class="section-title">كل ما تحتاجه لتنمية تجارتك</h2>
+      <p class="section-sub">منصة متكاملة تعطيك الأدوات والجمهور والدعم — كل شيء في مكان واحد.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon bg-blue" style="font-size:26px">👥</div>
+        <h3>جمهور جاهز للشراء</h3>
+        <p>أكثر من ٣.٢ مليون عميل نشط يزورون المنصة يومياً. لن تحتاج لبناء جمهورك من الصفر — نحن نحضر العملاء إليك.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon bg-green" style="font-size:26px">💰</div>
+        <h3>عمولة تنافسية ومنصفة</h3>
+        <p>ابدأ بعمولة ٤٪ فقط على كل عملية بيع. لا رسوم شهرية ثابتة. لا مخاطرة. ادفع فقط عندما تبيع.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon bg-amber" style="font-size:26px">📱</div>
+        <h3>أدوات تسويقية مدمجة</h3>
+        <p>إعلانات ذكية، وحملات إيميل، وبرنامج إحالة — كل الأدوات التسويقية جاهزة لك داخل لوحة التحكم.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon bg-purple" style="font-size:26px">⚡</div>
+        <h3>تشغيل سريع في ٢٤ ساعة</h3>
+        <p>أنشئ متجرك، أضف منتجاتك، وابدأ البيع خلال أقل من يوم واحد. بدون أكواد أو خبرة تقنية.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon bg-teal" style="font-size:26px">📊</div>
+        <h3>تحليلات ذكية للمبيعات</h3>
+        <p>تقارير تفصيلية عن أداء منتجاتك وسلوك العملاء تساعدك على اتخاذ قرارات مبنية على بيانات حقيقية.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon bg-red" style="font-size:26px">🛡️</div>
+        <h3>حماية كاملة للبائع</h3>
+        <p>نظام حماية متقدم ضد الطلبات المزيفة والاحتيال. حقوقك مضمونة ومحفوظة في كل معاملة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES (dark) -->
+<section id="features" class="features-bg">
+  <div class="section-inner">
+    <div class="text-center" style="margin-bottom:0">
+      <div class="section-tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.9)">مميزات المنصة</div>
+      <h2 class="section-title" style="color:#fff">كل ما تحتاجه في مكان واحد</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:560px;margin:0 auto">منظومة متكاملة من الأدوات المتطورة التي تجعل إدارة متجرك أمراً سهلاً وممتعاً</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🏪</div>
+        <h3>متجر احترافي قابل للتخصيص</h3>
+        <p>صمّم متجرك بهويتك البصرية الكاملة. شعارك، ألوانك، وصفحتك المخصصة</p>
+        <ul class="feat-list"><li>قوالب تصميم متعددة</li><li>نطاق فرعي مخصص</li><li>صور وفيديوهات عالية الجودة</li></ul>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💳</div>
+        <h3>نظام مدفوعات متكامل</h3>
+        <p>قبول جميع وسائل الدفع المحلية والعالمية. تحويل أرباحك أسبوعياً بشكل تلقائي</p>
+        <ul class="feat-list"><li>مدى، فيزا، ماستركارد</li><li>تحويل بنكي مباشر</li><li>تقسيط بدون فوائد</li></ul>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🚚</div>
+        <h3>شركاء شحن وتوصيل</h3>
+        <p>شبكة شحن متكاملة مع أفضل شركات التوصيل. تتبع الطلبات في الوقت الحقيقي</p>
+        <ul class="feat-list"><li>٥٠+ شريك لوجستي</li><li>توصيل في نفس اليوم للمدن الكبرى</li><li>تتبع تلقائي للعميل</li></ul>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📈</div>
+        <h3>تسويق ذكي بالذكاء الاصطناعي</h3>
+        <p>اقتراحات تلقائية لتحسين منتجاتك وأسعارك بناء على تحليل السوق الحقيقي</p>
+        <ul class="feat-list"><li>تحسين SEO المنتجات تلقائياً</li><li>توصيات تسعير ذكية</li><li>إعلانات مستهدفة</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps" class="steps-section">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-tag">خطوات التسجيل</div>
+      <h2 class="section-title">ابدأ في ٣ خطوات بسيطة</h2>
+      <p class="section-sub">لا تعقيد، لا انتظار طويل — فقط سجّل وابدأ البيع</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">١</div>
+        <h3>أنشئ حسابك</h3>
+        <p>سجّل بياناتك الأساسية وتحقق من هويتك. العملية لا تستغرق أكثر من ٥ دقائق.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">٢</div>
+        <h3>أضف منتجاتك</h3>
+        <p>ارفع صور منتجاتك، أضف الأوصاف والأسعار. نظامنا الذكي يساعدك على تحسين كل تفصيلة.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">٣</div>
+        <h3>ابدأ البيع واربح</h3>
+        <p>متجرك جاهز! ابدأ استقبال الطلبات وتحصيل الأرباح مباشرة في حسابك البنكي.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <button class="btn-primary" onclick="scrollToSection('#register')" style="font-size:17px;padding:18px 40px">ابدأ الآن مجاناً ←</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-tag">باقات الأسعار</div>
+      <h2 class="section-title">اختر الباقة المناسبة لك</h2>
+      <p class="section-sub">ابدأ مجاناً، وكبّر تدريجياً. لا تعاقد، لا رسوم خفية</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <div class="plan-name">🌱 الباقة المجانية</div>
+        <div class="plan-price">٠ <span>ريال / شهر</span></div>
+        <div class="plan-desc">مثالية للبدء وتجربة المنصة دون أي التزام</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> حتى ٢٠ منتج</li>
+          <li><span class="check">✓</span> لوحة تحكم أساسية</li>
+          <li><span class="check">✓</span> دعم عبر البريد الإلكتروني</li>
+          <li><span class="cross">✗</span> حملات تسويقية</li>
+          <li><span class="cross">✗</span> تقارير متقدمة</li>
+          <li><span class="cross">✗</span> أولوية في نتائج البحث</li>
+        </ul>
+        <button class="plan-btn" onclick="scrollToSection('#register')">ابدأ مجاناً</button>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-badge">🔥 الأكثر شعبية</div>
+        <div class="plan-name">🚀 الباقة الاحترافية</div>
+        <div class="plan-price">٩٩ <span>ريال / شهر</span></div>
+        <div class="plan-desc">للبائعين الجادين الراغبين في تنمية أعمالهم بسرعة</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> منتجات غير محدودة</li>
+          <li><span class="check">✓</span> تحليلات وتقارير متقدمة</li>
+          <li><span class="check">✓</span> حملات تسويقية + إيميل</li>
+          <li><span class="check">✓</span> أولوية في نتائج البحث</li>
+          <li><span class="check">✓</span> دعم على مدار الساعة</li>
+          <li><span class="check">✓</span> عمولة مخفضة ٣٪ فقط</li>
+        </ul>
+        <button class="plan-btn featured-btn" onclick="scrollToSection('#register')">ابدأ الآن ←</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">🏢 باقة الأعمال</div>
+        <div class="plan-price">٢٤٩ <span>ريال / شهر</span></div>
+        <div class="plan-desc">للتجار والشركات ذات المبيعات المرتفعة</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> كل مميزات الاحترافية</li>
+          <li><span class="check">✓</span> عمولة ٢٪ فقط</li>
+          <li><span class="check">✓</span> مدير حساب مخصص</li>
+          <li><span class="check">✓</span> API كامل + تكاملات</li>
+          <li><span class="check">✓</span> تقارير مخصصة</li>
+          <li><span class="check">✓</span> شارة "بائع موثوق" مميزة</li>
+        </ul>
+        <button class="plan-btn" onclick="scrollToSection('#register')">تواصل معنا</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-bg">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-tag">قصص نجاح</div>
+      <h2 class="section-title">بائعون حقيقيون، نتائج حقيقية</h2>
+      <p class="section-sub">آلاف التجار حققوا أهدافهم معنا. اقرأ قصصهم</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"انضممت للمنصة قبل ٨ أشهر بصفر خبرة في التجارة الإلكترونية. اليوم متجري يحقق مبيعات يومية ثابتة والدعم كان رائعاً من اليوم الأول."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#1B4FD8">أح</div>
+          <div>
+            <div class="testi-name">أحمد الحارثي</div>
+            <div class="testi-role">مستلزمات منزلية — الرياض</div>
+          </div>
+        </div>
+        <div class="testi-revenue">↑ ٢٤٠٪ نمو في المبيعات</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"كنت أبيع من الإنستجرام وحجمي كان محدوداً. بعد الانضمام هنا وصلت منتجاتي لعملاء من ٦ مدن مختلفة في أول شهر فقط."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#7C3AED">سم</div>
+          <div>
+            <div class="testi-name">سارة المحمد</div>
+            <div class="testi-role">عبايات وأزياء — جدة</div>
+          </div>
+        </div>
+        <div class="testi-revenue">↑ ١٨٠٪ زيادة في الطلبات</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"نظام الشحن المدمج وفّر عليّ الكثير من الوقت والجهد. التكامل مع شركات التوصيل يعمل بشكل مثالي والتتبع التلقائي أسعد عملائي."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#059669">خع</div>
+          <div>
+            <div class="testi-name">خالد العمري</div>
+            <div class="testi-role">إلكترونيات — الدمام</div>
+          </div>
+        </div>
+        <div class="testi-revenue">↑ ٣٢٠٪ نمو في العملاء</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section>
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-tag">مقارنة المنصات</div>
+      <h2 class="section-title">لماذا نحن الاختيار الأفضل؟</h2>
+      <p class="section-sub">قارن بنفسك وقرّر بوضوح</p>
+    </div>
+    <div class="compare-table">
+      <div class="cmp-row header">
+        <div class="cmp-cell" style="justify-content:flex-start">الميزة</div>
+        <div class="cmp-cell us" style="font-weight:800;font-size:15px">⭐ ماركت برو</div>
+        <div class="cmp-cell">منصة أ</div>
+        <div class="cmp-cell">منصة ب</div>
+      </div>
+      <div class="cmp-row highlight-row">
+        <div class="cmp-cell">عمولة منخفضة (٢-٤٪)</div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">دعم عربي ٢٤/٧</div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+      </div>
+      <div class="cmp-row highlight-row">
+        <div class="cmp-cell">بدء مجاني بدون بطاقة</div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">أدوات تسويق مدمجة</div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+      </div>
+      <div class="cmp-row highlight-row">
+        <div class="cmp-cell">دفع أسبوعي للأرباح</div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell">حماية البائع الكاملة</div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-cross">✗</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--gray50)">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-tag">الأسئلة الشائعة</div>
+      <h2 class="section-title">هل لديك أسئلة؟</h2>
+      <p class="section-sub">نجيب على كل استفساراتك بوضوح وصراحة</p>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item open">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          كيف أبدأ البيع على المنصة؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">سجّل حسابك مجاناً، أضف بيانات متجرك ومنتجاتك، وبعد مراجعة بسيطة تستغرق ٢٤ ساعة يصبح متجرك مرئياً لملايين العملاء. العملية كلها إلكترونية ولا تحتاج لأي خبرة تقنية.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          هل هناك رسوم خفية أو عقد ملزم؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">لا على الإطلاق. الباقة المجانية بلا أي تكلفة. الباقات المدفوعة رسومها شهرية وشفافة تماماً ويمكن الإلغاء في أي وقت. عمولتنا على المبيعات فقط وهي معلنة ومتفق عليها مسبقاً.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          متى وكيف أستلم أرباحي؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">يتم تحويل الأرباح أسبوعياً مباشرة إلى حسابك البنكي المسجل. يمكنك متابعة رصيدك المتاح وطلبات السحب من لوحة التحكم في أي وقت.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ما هي المنتجات المسموح ببيعها؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">تقبل المنصة معظم المنتجات الحلال والقانونية — ملابس، إلكترونيات، طعام، مستحضرات تجميل، مستلزمات منزلية، هدايا، وأكثر. تحقق من قائمة المنتجات المقيدة في صفحة سياسات البائعين.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          كيف تتعامل المنصة مع المرتجعات والشكاوى؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">لدينا فريق متخصص للنزاعات يضمن حقوق البائع والمشتري معاً. في حالات الاحتيال أو الطلبات المزيفة، يتم استرداد قيمة المنتج للبائع تلقائياً بعد التحقيق.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          هل يمكنني إدارة متجري من الجوال؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">نعم! تطبيق البائع متاح على iOS وAndroid ويمنحك تحكماً كاملاً في متجرك من أي مكان — إضافة منتجات، متابعة الطلبات، والتواصل مع العملاء.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <div class="section-tag" style="background:rgba(245,158,11,.2);color:#FCD34D;border:1px solid rgba(245,158,11,.3)">🚀 ابدأ اليوم</div>
+    <h2>هل أنت جاهز لتحويل<br><span>شغفك إلى مصدر دخل؟</span></h2>
+    <p>انضم لأكثر من ١٠,٠٠٠ بائع نشط يحققون أهدافهم كل يوم. التسجيل مجاني وسهل — لا تنتظر أكثر.</p>
+    <div class="final-btns">
+      <button class="btn-primary" onclick="scrollToSection('#register')" style="font-size:17px;padding:18px 40px">سجّل متجرك مجاناً الآن ←</button>
+      <button class="btn-secondary" onclick="scrollToSection('#faq')">لديّ سؤال أولاً</button>
+    </div>
+    <p style="margin-top:20px;font-size:13px;color:rgba(255,255,255,.5)">✓ لا بطاقة ائتمان ✓ لا رسوم إعداد ✓ ابدأ في أقل من ٢٤ ساعة</p>
+  </div>
+</section>
+
+<!-- REGISTER FORM -->
+<section id="register" class="form-section">
+  <div class="section-inner">
+    <div class="text-center" style="margin-bottom:40px">
+      <div class="section-tag">سجّل الآن</div>
+      <h2 class="section-title">ابدأ رحلة نجاحك اليوم</h2>
+      <p class="section-sub">سجّل مجاناً وستتواصل معك فريقنا خلال ٢٤ ساعة</p>
+    </div>
+    <div class="form-wrapper">
+      <div id="formSuccess" style="display:none;text-align:center;padding:32px">
+        <div style="font-size:60px;margin-bottom:16px">🎉</div>
+        <h3 style="font-size:24px;font-weight:900;color:var(--dark);margin-bottom:8px">تم التسجيل بنجاح!</h3>
+        <p style="color:var(--text2);line-height:1.8">سيتواصل معك أحد مختصينا خلال ٢٤ ساعة لإتمام إعداد متجرك. تحقق من بريدك الإلكتروني.</p>
+      </div>
+      <div id="formContent">
+        <div class="form-grid">
+          <div class="form-group"><label>الاسم الأول</label><input type="text" placeholder="محمد"></div>
+          <div class="form-group"><label>اسم العائلة</label><input type="text" placeholder="العمري"></div>
+          <div class="form-group full"><label>البريد الإلكتروني</label><input type="email" placeholder="name@example.com"></div>
+          <div class="form-group full"><label>رقم الجوال</label><input type="tel" placeholder="+966 5X XXX XXXX"></div>
+          <div class="form-group full"><label>اسم المتجر</label><input type="text" placeholder="اسم متجرك التجاري"></div>
+          <div class="form-group full">
+            <label>فئة المنتجات</label>
+            <select>
+              <option value="">اختر فئة منتجاتك الرئيسية</option>
+              <option>ملابس وأزياء</option>
+              <option>إلكترونيات وتقنية</option>
+              <option>طعام ومشروبات</option>
+              <option>مستحضرات تجميل</option>
+              <option>مستلزمات منزلية</option>
+              <option>هدايا وإكسسوارات</option>
+              <option>صحة ولياقة</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>كيف سمعت عنّا؟ (اختياري)</label>
+            <select>
+              <option value="">اختر...</option>
+              <option>وسائل التواصل الاجتماعي</option>
+              <option>توصية من صديق</option>
+              <option>محركات البحث</option>
+              <option>إعلان رقمي</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+        </div>
+        <button class="form-submit" onclick="submitForm()">أرسل طلب التسجيل ←</button>
+        <div class="form-guarantee">🔒 بياناتك آمنة ومحمية تماماً. لن نشاركها مع أي طرف ثالث</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800">
+          <div class="nav-logo-icon">م</div>
+          ماركت برو
+        </div>
+        <p>منصة التجارة الإلكترونية الأولى للبائعين العرب. نوفر كل ما تحتاجه لبناء تجارتك الرقمية وتنميتها.</p>
+        <div class="footer-social" style="margin-top:16px">
+          <div class="social-btn">𝕏</div>
+          <div class="social-btn">in</div>
+          <div class="social-btn">f</div>
+          <div class="social-btn">▶</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <a href="#">المميزات</a>
+        <a href="#">الأسعار</a>
+        <a href="#">قصص النجاح</a>
+        <a href="#">المدونة</a>
+      </div>
+      <div class="footer-col">
+        <h4>دعم البائعين</h4>
+        <a href="#">مركز المساعدة</a>
+        <a href="#">دليل البدء</a>
+        <a href="#">سياسة البائعين</a>
+        <a href="#">تواصل معنا</a>
+      </div>
+      <div class="footer-col">
+        <h4>قانوني</h4>
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">سياسة العمولات</a>
+        <a href="#">سياسة المرتجعات</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ٢٠٢٥ ماركت برو. جميع الحقوق محفوظة.</span>
+      <span>🇸🇦 مصمم للسوق العربي</span>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="للأعلى">↑</button>
+
+<script>
+function scrollToSection(id){
+  const el=document.querySelector(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+function submitForm(){
+  const fc=document.getElementById('formContent');
+  const fs=document.getElementById('formSuccess');
+  fc.style.opacity='0';
+  fc.style.transition='opacity .3s';
+  setTimeout(()=>{fc.style.display='none';fs.style.display='block';},300);
+}
+const scrollBtn=document.querySelector('.scroll-to-top');
+window.addEventListener('scroll',()=>{
+  scrollBtn.style.opacity=window.scrollY>400?'1':'0';
+  scrollBtn.style.pointerEvents=window.scrollY>400?'auto':'none';
+},{ passive:true });
+scrollBtn.style.opacity='0';
+</script>
